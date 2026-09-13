@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { SecurityPage } from "@/components/secondary-pages";
+export const Route = createFileRoute("/security")({ head: () => ({ meta: [{ title: "Security Lab — AgentPayGuard" }, { name: "description", content: "Explore hard budget caps, replay protection, and delivery verification." }, { property: "og:title", content: "AgentPayGuard Security Lab" }, { property: "og:description", content: "Bytecode-enforced limits for autonomous payments." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: SecurityPage });

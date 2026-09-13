@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { AuditPage } from "@/components/secondary-pages";
+export const Route = createFileRoute("/audit")({ head: () => ({ meta: [{ title: "Audit Trail — AgentPayGuard" }, { name: "description", content: "Trace every cryptographically verified autonomous payment event." }, { property: "og:title", content: "AgentPayGuard Audit Trail" }, { property: "og:description", content: "A forensic timeline for machine payments." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: AuditPage });
