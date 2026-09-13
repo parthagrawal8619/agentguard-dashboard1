@@ -1,0 +1,8 @@
+import { ExternalLink } from "lucide-react";
+import type { Payment } from "@/lib/agentpay-data";
+import { HashLine, StatusBadge } from "@/components/agentpay-ui";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+
+export function PaymentDetail({ payment, onOpenChange }: { payment: Payment | null; onOpenChange: (open: boolean) => void }) {
+  return <Sheet open={Boolean(payment)} onOpenChange={onOpenChange}><SheetContent className="w-full overflow-y-auto bg-background sm:max-w-lg">{payment && <><SheetHeader><SheetTitle>Transaction {payment.id}</SheetTitle><SheetDescription>Autonomous x402 payment record</SheetDescription></SheetHeader><div className="mt-7 grid grid-cols-2 gap-3"><div className="metric-box"><span>Amount</span><strong>{payment.amount.toFixed(2)} USDC</strong></div><div className="metric-box"><span>Status</span><StatusBadge status={payment.status}/></div><div className="metric-box"><span>Service</span><strong>{payment.service}</strong></div><div className="metric-box"><span>Provider</span><strong>{payment.provider}</strong></div></div><div className="mt-6"><HashLine label="Request hash" value={payment.requestHash}/><HashLine label="Response hash" value={payment.responseHash}/><HashLine label="Content hash" value={payment.contentHash}/>{payment.tx && <HashLine label="Transaction" value={payment.tx}/>}</div>{payment.tx && <a className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan" href={`https://sepolia.basescan.org/tx/${payment.tx}`} target="_blank" rel="noreferrer">View on BaseScan <ExternalLink className="size-4"/></a>}</>}</SheetContent></Sheet>;
+}
