@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { DashboardPage } from "@/components/dashboard-page";
+export const Route = createFileRoute("/dashboard")({ head: () => ({ meta: [{ title: "Command Center — AgentPayGuard" }, { name: "description", content: "Monitor autonomous x402 payments and on-chain budget enforcement." }, { property: "og:title", content: "AgentPayGuard Command Center" }, { property: "og:description", content: "Live autonomous payment controls and security telemetry." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: DashboardPage });

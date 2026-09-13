@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ServicesPage } from "@/components/secondary-pages";
+export const Route = createFileRoute("/services")({ head: () => ({ meta: [{ title: "Service Network — AgentPayGuard" }, { name: "description", content: "Browse machine-payable services available to AGENT-01." }, { property: "og:title", content: "AgentPayGuard Service Network" }, { property: "og:description", content: "Verified x402 providers and usage history." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: ServicesPage });

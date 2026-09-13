@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { SettingsPage } from "@/components/secondary-pages";
+export const Route = createFileRoute("/settings")({ head: () => ({ meta: [{ title: "Settings — AgentPayGuard" }, { name: "description", content: "Configure AgentPayGuard themes, thresholds, wallet, and agent policies." }, { property: "og:title", content: "AgentPayGuard Settings" }, { property: "og:description", content: "Configure autonomous payment protection." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: SettingsPage });

@@ -1,24 +1,36 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowRight, CheckCircle2, LockKeyhole, Menu, ShieldAlert, Sparkles, X } from "lucide-react";
+import { useState } from "react";
+import { AgentPortrait, Brand, ThemeToggle } from "@/components/agentpay-ui";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({ meta: [
+    { title: "AgentPayGuard — AI Decides. Blockchain Enforces." },
+    { name: "description", content: "On-chain budget enforcement for autonomous AI agent payments." },
+    { property: "og:title", content: "AgentPayGuard" },
+    { property: "og:description", content: "AI decides. The blockchain enforces." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ]}),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const [menu, setMenu] = useState(false);
+  const reduced = useReducedMotion();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="landing min-h-screen overflow-hidden bg-background text-foreground">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl"><div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6"><Brand/><nav className="hidden items-center gap-7 md:flex"><a href="#protocol" className="story-link text-xs text-muted-foreground">Protocol</a><a href="#enforcement" className="story-link text-xs text-muted-foreground">Enforcement</a><a href="#network" className="story-link text-xs text-muted-foreground">Network</a></nav><div className="flex items-center gap-2"><ThemeToggle/><Button className="hidden sm:inline-flex" asChild><Link to="/dashboard">Launch dashboard <ArrowRight/></Link></Button><Button className="md:hidden" variant="outline" size="icon" onClick={() => setMenu(!menu)} aria-label="Toggle menu">{menu?<X/>:<Menu/>}</Button></div></div>{menu && <div className="border-t border-border bg-background px-4 py-4 md:hidden"><div className="flex flex-col gap-3"><a href="#protocol">Protocol</a><a href="#enforcement">Enforcement</a><Button asChild><Link to="/dashboard">Launch dashboard</Link></Button></div></div>}</header>
+      <main>
+        <section className="hero-grid relative mx-auto grid min-h-[760px] max-w-7xl items-center gap-8 px-4 pb-16 pt-28 sm:px-6 lg:grid-cols-[1.02fr_.98fr]">
+          <div className="relative z-10"><motion.div initial={reduced?false:{opacity:0,y:12}} animate={{opacity:1,y:0}} className="mb-7 inline-flex items-center gap-2 rounded-sm border border-cyan/30 bg-cyan/[.06] px-3 py-2 font-mono text-[10px] uppercase text-cyan"><Sparkles className="size-3.5"/>Autonomous commerce · secured</motion.div><motion.h1 initial={reduced?false:{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{delay:.08}} className="font-display text-5xl font-bold leading-[1.02] sm:text-6xl lg:text-7xl">AI decides.<br/><span className="text-cyan">The blockchain</span><br/>enforces.</motion.h1><p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">Give AI agents the freedom to buy services—not the power to break the budget. AgentPayGuard turns spending policy into unbypassable code.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button size="lg" className="h-12" asChild><Link to="/dashboard">Launch dashboard <ArrowRight/></Link></Button><Button size="lg" variant="outline" className="h-12" asChild><Link to="/demo"><ShieldAlert/>Run security demo</Link></Button></div><div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs text-muted-foreground"><span className="flex items-center gap-2"><CheckCircle2 className="size-4 text-cyan"/>x402 native</span><span className="flex items-center gap-2"><CheckCircle2 className="size-4 text-cyan"/>Base Sepolia</span><span className="flex items-center gap-2"><CheckCircle2 className="size-4 text-cyan"/>Non-custodial</span></div></div>
+          <motion.div initial={reduced?false:{opacity:0,scale:.96}} animate={{opacity:1,scale:1}} transition={{delay:.12}} className="hero-visual"><div className="hero-hud"><div className="flex items-center justify-between"><span className="hud-label">AGENT-01 / LIVE POLICY</span><span className="status-badge status-success"><span className="size-1.5 rounded-full bg-current"/>ONLINE</span></div><AgentPortrait eager className="mx-auto mt-2 size-[310px] sm:size-[390px]"/><div className="absolute bottom-6 left-5 right-5 grid grid-cols-3 gap-2"><div className="hero-stat"><span>LIMIT</span><strong>10 USDC</strong></div><div className="hero-stat"><span>SPENT</span><strong>9 USDC</strong></div><div className="hero-stat border-destructive/40"><span>4 USDC ATTEMPT</span><strong className="text-destructive">BLOCKED</strong></div></div></div></motion.div>
+        </section>
+        <section id="protocol" className="border-y border-border bg-card/30"><div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2"><div><p className="hud-label">The payment boundary</p><h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Intent stays intelligent.<br/>Limits stay absolute.</h2><p className="mt-5 max-w-xl text-muted-foreground">The agent discovers providers and negotiates x402 payments. The contract independently validates every transfer against the remaining budget.</p></div><div className="policy-console"><div className="flex justify-between font-mono text-xs"><span>BudgetContract.sol</span><span className="text-cyan">DEPLOYED</span></div><div className="my-6 space-y-3 font-mono text-sm"><p><span className="text-purple">uint256</span> budget = <span className="text-cyan">10 USDC</span>;</p><p><span className="text-purple">uint256</span> spent = <span className="text-cyan">9 USDC</span>;</p><p>require(spent + amount &lt;= budget);</p></div><div className="rounded-sm border border-destructive/30 bg-destructive/[.06] p-4"><p className="font-mono text-xs text-destructive">REVERT: BUDGET_EXCEEDED</p><div className="mt-2 flex items-center justify-between"><span className="text-xs text-muted-foreground">9 + 4 &gt; 10</span><strong className="text-sm">0 USDC transferred</strong></div></div></div></div></section>
+        <section id="enforcement" className="mx-auto max-w-7xl px-4 py-20 sm:px-6"><div className="grid gap-4 md:grid-cols-3">{[[LockKeyhole,"Hard cap","Immutable spending ceilings are checked before settlement."],[ShieldAlert,"Replay safe","Consumed payment proofs cannot be submitted twice."],[CheckCircle2,"Delivery proof","Content hashes confirm the service response you paid for."]].map(([Icon,title,text]) => { const IconComponent = Icon as typeof LockKeyhole; return <article className="feature-block" key={title as string}><IconComponent className="size-6 text-cyan"/><h3 className="mt-6 font-display text-lg font-semibold">{title as string}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text as string}</p></article>})}</div></section>
+      </main><footer id="network" className="border-t border-border"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-4 py-8 sm:flex-row sm:items-center sm:px-6"><Brand/><p className="font-mono text-[10px] text-muted-foreground">AGENTPAYGUARD · BASE SEPOLIA · 2026</p></div></footer>
     </div>
   );
 }

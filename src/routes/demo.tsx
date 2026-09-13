@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { DemoPage } from "@/components/secondary-pages";
+export const Route = createFileRoute("/demo")({ head: () => ({ meta: [{ title: "Overspend Attack Demo — AgentPayGuard" }, { name: "description", content: "Run a cinematic on-chain overspend attack simulation." }, { property: "og:title", content: "AgentPayGuard Attack Simulation" }, { property: "og:description", content: "Watch bytecode stop an autonomous agent overspend." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: DemoPage });
